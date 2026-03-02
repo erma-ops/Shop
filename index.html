@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Off-Road жизнь</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E85A04;
+            --dark: #0A0A0A;
+            --dark-light: #141414;
+            --gray: #2A2A2A;
+            --text: #FFFFFF;
+            --text-muted: #888888;
+            --accent: #00D9FF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--gray);
+            border-radius: 25px;
+            padding: 8px 20px;
+            border: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            color: var(--text);
+            outline: none;
+            width: 150px;
+            font-size: 0.9rem;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(10,10,10,1) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,107,53,0.3);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--primary);
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: 10s;
+        }
+
+        .blog-section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            background: var(--gray);
+            border: 1px solid var(--gray);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tag:hover, .tag.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--dark-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--gray);
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255,107,53,0.2);
+        }
+
+        .blog-card.featured {
+            grid-column: span 2;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--gray) 0%, var(--dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card.featured .card-image {
+            height: 400px;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.9) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .blog-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-meta i {
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: color 0.3s;
+        }
+
+        .blog-card:hover .card-title {
+            color: var(--primary);
+        }
+
+        .card-excerpt {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .card-tag {
+            padding: 5px 12px;
+            background: var(--gray);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .about-section {
+            padding: 100px 5%;
+            background: var(--dark-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, var(--gray) 0%, var(--dark) 100%);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--gray);
+        }
+
+        .about-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--primary);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(255,107,53,0.3);
+        }
+
+        .experience-badge .number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-content h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .about-content h2 span {
+            color: var(--primary);
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .instagram-section {
+            padding: 100px 5%;
+            overflow: hidden;
+        }
+
+        .instagram-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .instagram-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .instagram-header a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper {
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 300px;
+            height: 300px;
+            background: var(--gray);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .slide:hover img {
+            transform: scale(1.1);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,107,53,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .slide:hover .slide-overlay {
+            opacity: 1;
+        }
+
+        .slide-overlay i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev {
+            left: -25px;
+        }
+
+        .slider-btn.next {
+            right: -25px;
+        }
+
+        .contact-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .contact-section > p {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: var(--dark);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--gray);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--dark-light);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,107,53,0.3);
+        }
+
+        footer {
+            background: var(--dark);
+            padding: 60px 5% 30px;
+            border-top: 1px solid var(--gray);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .masonry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card.featured {
+                grid-column: span 1;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image-main {
+                height: 400px;
+            }
+
+            .experience-badge {
+                right: 20px;
+                bottom: -20px;
+                padding: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .slider-btn.prev {
+                left: 10px;
+            }
+
+            .slider-btn.next {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--gray);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            animation: load 2s ease-out forwards;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes load {
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-text">МОЯ OFF-ROAD ЖИЗНЬ</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-mountain"></i>
+            Моя Off-Road
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#blog">Блог</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Поиск..." id="searchInput">
+        </div>
+
+        <div class="mobile-menu" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Моя Off-Road<br>жизнь</h1>
+            <p>Истории с гонок, путешествия по бездорожью и адреналин на колёсах. Добро пожаловать в мир, где асфальт заканчивается, а настоящее приключение начинается.</p>
+            <a href="#blog" class="cta-button">Читать блог</a>
+        </div>
+    </section>
+
+    <section class="blog-section" id="blog">
+        <div class="section-header">
+            <h2 class="section-title">Последние записи</h2>
+            <div class="filter-tags">
+                <a href="#" class="tag active">Все</a>
+                <a href="#" class="tag">Гонки</a>
+                <a href="#" class="tag">Путешествия</a>
+                <a href="#" class="tag">Техника</a>
+                <a href="#" class="tag">Подготовка</a>
+            </div>
+        </div>
+
+        <div class="masonry-grid" id="blogGrid">
+            <article class="blog-card featured">
+                <div class="card-image">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; color: #444; font-size: 1.2rem;">
+                        <i class="fas fa-image" style="font-size: 3rem; margin-right: 15px;"></i>
+                        [Фото гонки - заглушка]
+                    </div>
+                    <div class="card-overlay">
+                        <span class="read-more">Читать далее <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar"></i> 28 февраля 2026</span>
+                        <span><i class="far fa-clock"></i> 8 мин чтения</span>
+                    </div>
+                    <h3 class="card-title">Легендарный маршрут: как мы прошли Койтендаг за один день</h3>
+                    <p class="card-excerpt">400 километров песка, скал и бродов. Рассказываю, как подготовился к самому сложному этапу сезона и что пошло не по плану прямо на трассе.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Гонки</span>
+                        <span class="card-tag">Off-Road</span>
+                        <span class="card-tag">Победа</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #333 0%, #222 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                        <i class="fas fa-image" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <span class="read-more">Читать <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar"></i> 15 фев 2026</span>
+                    </div>
+                    <h3 class="card-title">Новый внедорожник: первые впечатления</h3>
+                    <p class="card-excerpt">Тест-драйв свежего варианта перед сезоном. Что изменилось в подвеске и почему я выбрал именно эту комплектацию.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Техника</span>
+                        <span class="card-tag">Обзор</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                        <i class="fas fa-image" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <span class="read-more">Читать <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar"></i> 02 фев 2026</span>
+                    </div>
+                    <h3 class="card-title">Пустыня Калмыкия: подготовка к экспедиции</h3>
+                    <p class="card-excerpt">Чек-лист снаряжения, маршрут и советы по выживанию в условиях полного одиночества.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Путешествия</span>
+                        <span class="card-tag">Подготовка</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #333 0%, #222 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                        <i class="fas fa-image" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <span class="read-more">Читать <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar"></i> 20 янв 2026</span>
+                    </div>
+                    <h3 class="card-title">Топ-5 ошибок новичков на бездорожье</h3>
+                    <p class="card-excerpt">Разбираю типичные косяки, которые допускают начинающие гонщики и путешественники.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Советы</span>
+                        <span class="card-tag">Обучение</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="card-image">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                        <i class="fas fa-image" style="font-size: 2rem;"></i>
+                    </div>
+                    <div class="card-overlay">
+                        <span class="read-more">Читать <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar"></i> 10 янв 2026</span>
+                    </div>
+                    <h3 class="card-title">Зимний Off-Road: особенности вождения</h3>
+                    <p class="card-excerpt">Как не застрять в сугробе и что делать, если всё же застрял. Лайфхаки зимнего сезона.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Зима</span>
+                        <span class="card-tag">Сезон</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <div class="about-image-main">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; color: #666; flex-direction: column;">
+                        <i class="fas fa-user" style="font-size: 5rem; margin-bottom: 20px;"></i>
+                        <span>[Ваше фото - заглушка]</span>
+                    </div>
+                </div>
+                <div class="experience-badge">
+                    <span class="number">10+</span>
+                    <span class="text">лет в спорте</span>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <h2>Уверенный <span>гонщик</span></h2>
+                <p class="about-text">
+                    Привет! Я профессиональный участник off-road соревнований с десятилетним стажем. Начинал с любительских заездов по грязи, а сегодня участвую в международных ралли-рейдах и экспедициях по самым сложным маршрутам планеты.
+                </p>
+                <p class="about-text">
+                    Этот блог — моя личная история о мире бездорожья, где каждый километр — это вызов самому себе. Здесь я делюсь опытом подготовки, рассказываю о технических деталях и показываю красоту дикой природы, доступную только на полном приводе.
+                </p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Гонок</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Побед</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100k</div>
+                        <div class="stat-label">км пути</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="instagram-section">
+        <div class="instagram-header">
+            <h2><i class="fab fa-instagram" style="color: var(--primary);"></i> Моменты с трасс</h2>
+            <a href="https://instagram.com" target="_blank">@myoffroadlife <i class="fas fa-external-link-alt"></i></a>
+        </div>
+
+        <div class="slider-container">
+            <button class="slider-btn prev" onclick="moveSlider(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #444 0%, #222 100%); display: flex; align-items: center; justify-content: center; color: #666;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #333 0%, #111 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; color: #666;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a 0%, #0a0a0a 100%); display: flex; align-items: center; justify-content: center; color: #444;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #353535 0%, #151515 100%); display: flex; align-items: center; justify-content: center; color: #555;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #404040 0%, #202020 100%); display: flex; align-items: center; justify-content: center; color: #666;">
+                            <i class="fab fa-instagram" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="slide-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-btn next" onclick="moveSlider(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2>Связаться со мной</h2>
+            <p>Есть вопросы о гонках, хотите пригласить на интервью или предложить сотрудничество? Напишите!</p>
+            
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" placeholder="Иван Иванов" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="example@mail.ru" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Сообщение</label>
+                    <textarea placeholder="Расскажите, что вас интересует..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить сообщение</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Моя Off-Road жизнь</h3>
+                <p>Блог профессионального гонщика о мире бездорожья, адреналине и настоящих приключениях.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#blog">Блог</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Темы</h4>
+                <ul>
+                    <li><a href="#">Гонки</a></li>
+                    <li><a href="#">Путешествия</a></li>
+                    <li><a href="#">Техника</a></li>
+                    <li><a href="#">Подготовка</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Контакты</h4>
+                <ul>
+                    <li><a href="mailto:info@myoffroad.ru">info@myoffroad.ru</a></li>
+                    <li><a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+                    <li>Москва, Россия</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Моя Off-Road жизнь. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.padding = '15px 5%';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.padding = '20px 5%';
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        let slidePosition = 0;
+        const slidesToShow = 4;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function moveSlider(direction) {
+            const slideWidth = 320;
+            const maxPosition = -(totalSlides - slidesToShow) * slideWidth;
+            
+            slidePosition += direction * -slideWidth;
+            
+            if (slidePosition > 0) slidePosition = maxPosition;
+            if (slidePosition < maxPosition) slidePosition = 0;
+            
+            document.getElementById('sliderTrack').style.transform = `translateX(${slidePosition}px)`;
+        }
+
+        setInterval(() => {
+            moveSlider(1);
+        }, 5000);
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.blog-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.card-tag')).map(tag => tag.textContent.toLowerCase());
+                
+                const match = title.includes(searchTerm) || 
+                             excerpt.includes(searchTerm) || 
+                             tags.some(tag => tag.includes(searchTerm));
+                
+                card.style.display = match ? 'block' : 'none';
+            });
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.');
+            e.target.reset();
+        }
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'var(--dark)';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '20px';
+            navLinks.style.borderBottom = '1px solid var(--gray)';
+        }
+
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.blog-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
